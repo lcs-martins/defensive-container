@@ -48,7 +48,7 @@ jobs:
           fetch-depth: 1
 
       - name: Auth in registry
-        run: echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+        run: echo $CR_PAT | docker login ghcr.io -u lcs-martins --password-stdin
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3.8.1
