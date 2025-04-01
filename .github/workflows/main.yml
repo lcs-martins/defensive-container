@@ -89,7 +89,7 @@ jobs:
           echo $IMAGE_DIGEST
 
       - name: Sign Keys
-        run: cosign sign --key cosign.key $( echo $IMAGE_DIGEST )
+        run: cosign sign --key cosign.key $( docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1 )
 
       - name: Push image
         run: |
