@@ -4,8 +4,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         run: echo "💡 The ${{ github.repository }} repository have changes"
       - name: Build an image from Dockerfile
         run: |
