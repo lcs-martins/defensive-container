@@ -1,0 +1,20 @@
+name: Sign image
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        run: echo "💡 The ${{ github.repository }} repository have changes"
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t custom-apache:1 .
+      - name: Check CIS Benchmark
+      - uses: goodwithtech/dockle-action@main
+        with:
+          image: 'custom-apache:1'
+          format: 'list'
+          exit-code: '1'
+          exit-level: 'warn'
+          ignore: 'CIS-DI-0001,DKL-DI-0006'
