@@ -51,14 +51,13 @@ jobs:
       
 
   sign-image:
+    name: sign-image
     runs-on: ubuntu-latest
-    needs: sign-image
-
+    needs: scanners
     permissions:
       contents: read
       packages: write
 
-    name: sign-image
     steps:
       - uses: actions/checkout@v4
         with:
