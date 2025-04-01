@@ -52,6 +52,9 @@ jobs:
 
       - name: Generate Keys
         run: cosign generate-key-pair
+        
+      - name: Auth in registry
+        run: echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 
       - name: ls
         run: ls -la
