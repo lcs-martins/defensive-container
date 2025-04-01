@@ -75,7 +75,7 @@ jobs:
         run: cosign generate-key-pair
 
       - name: Get image metadata
-        run: docker manifest inspect --format '{{.Digest}}' -v ghcr.io/lcs-martins/custom-apache:1
+        run: docker manifest inspect -v ghcr.io/lcs-martins/custom-apache:1
         # run: docker inspect --format '{{.Digest}}' ghcr.io/lcs-martins/custom-apache:1
 
       - name: Sign Keys
