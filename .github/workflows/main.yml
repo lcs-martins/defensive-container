@@ -75,6 +75,9 @@ jobs:
         run: cosign generate-key-pair
 
       - name: Get image metadata
+        run: docker rmi ghcr.io/lcs-martins/custom-apache:1
+
+      - name: Get image metadata
         run: docker pull ghcr.io/lcs-martins/custom-apache:1
         # run: docker inspect --format '{{.Digest}}' ghcr.io/lcs-martins/custom-apache:1
 
