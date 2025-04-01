@@ -40,9 +40,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push image
+      - name: Build image
         run: |
           docker build -t ghcr.io/lcs-martins/custom-apache:1 .
+      - name: Push image
+        run: |
+          docker push -t ghcr.io/lcs-martins/custom-apache:1
 
       
 
@@ -78,8 +81,8 @@ jobs:
         run: docker rmi ghcr.io/lcs-martins/custom-apache:1
 
       - name: Get image metadata
-        run: docker pull ghcr.io/lcs-martins/custom-apache:1
-        # run: docker inspect --format '{{.Digest}}' ghcr.io/lcs-martins/custom-apache:1
+        # run: docker pull ghcr.io/lcs-martins/custom-apache:1
+        run: docker inspect --format '{{.Digest}}' ghcr.io/lcs-martins/custom-apache:1
 
       - name: Sign Keys
         run: cosign sign --yes --key cosign.key $IMAGE_DIGEST
