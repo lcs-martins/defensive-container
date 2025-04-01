@@ -5,6 +5,10 @@ jobs:
   scanners:
     name: scanners
     runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+    
     steps:
 
       - name: Checkout code
