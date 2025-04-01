@@ -75,7 +75,7 @@ jobs:
         run: cosign generate-key-pair
 
       - name: Sign Keys
-        run: cosign sign —key cosign.key ghcr.io/lcs-martins/custom-apache:1 --yes
+        run: cosign sign --yes --key cosign.key ghcr.io/lcs-martins/custom-apache:1
 
       - name: Push image
         run: |
