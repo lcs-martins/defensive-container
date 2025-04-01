@@ -14,9 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build image
-        run: |
-          docker build -t custom-apache:1 .
+      - name: Build image localy
+        run: docker build -t custom-apache:1 .
 
       - name: Run dockle
         uses: goodwithtech/dockle-action@v0.4.15
@@ -44,23 +43,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image
-        run: |
-          docker build -t ghcr.io/lcs-martins/custom-apache:1 .
-      - name: Push image
-        run: |
-          docker push ghcr.io/lcs-martins/custom-apache:1
+      - name: Build image to registry
+        run: docker build -t ghcr.io/lcs-martins/custom-apache:1 .
 
+      - name: Push image
+        run: docker push ghcr.io/lcs-martins/custom-apache:1
       
 
   sign-image:
     runs-on: ubuntu-latest
-    needs: scanners
+    needs: sign-image
 
     permissions:
       contents: read
       packages: write
-      # id-token: write # needed for signing the images with GitHub OIDC Token
 
     name: sign-image
     steps:
