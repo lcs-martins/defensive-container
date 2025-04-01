@@ -84,8 +84,8 @@ jobs:
       - name: Get image metadata
         run: |
           docker pull ghcr.io/lcs-martins/custom-apache:1
-          export IMAGE_DIGEST=$(docker inspect --format '{{.Digest}}' ghcr.io/lcs-martins/custom-apache:1)
-          
+          export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1)
+
 
       - name: Sign Keys
         run: cosign sign --yes --key cosign.key $IMAGE_DIGEST
