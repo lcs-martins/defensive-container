@@ -1,5 +1,5 @@
 # Alpine Apache2 Dockerfile
-FROM alpine
+FROM ubuntu
 
 # Install Apache
 RUN apk add --no-cache apache2

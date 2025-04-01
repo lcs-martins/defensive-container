@@ -9,11 +9,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Build an image from Dockerfile
         run: |
-          docker build -t built-image:scan .
+          docker build -t custom-apache:1 .
       - name: Run dockle
         uses: goodwithtech/dockle-action@v0.4.15
         with:
-          image: 'built-image:scan'
+          image: 'custom-apache:1'
           format: 'list'
           exit-code: '1'
           exit-level: 'warn'
