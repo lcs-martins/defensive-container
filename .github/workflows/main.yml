@@ -85,6 +85,7 @@ jobs:
         run: |
           docker pull ghcr.io/lcs-martins/custom-apache:1
           export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1)
+          echo $IMAGE_DIGEST
 
 
       - name: Sign Keys
