@@ -1,8 +1,9 @@
-# Alpine Apache2 Dockerfile
-FROM ubuntu
+FROM ubuntu:latest
 
 # Install Apache
-RUN apk add --no-cache apache2
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    rm -rf /var/lib/apt/lists/*
 
-# Define the entrypoint
-ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
+# Set the entrypoint to start Apache in the foreground
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
