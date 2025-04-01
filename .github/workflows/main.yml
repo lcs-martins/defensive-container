@@ -7,9 +7,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Build an image from Dockerfile
         run: |
           docker build -t custom-apache:1 .
+
       - name: Run dockle
         uses: goodwithtech/dockle-action@v0.4.15
         with:
@@ -18,3 +20,13 @@ jobs:
           exit-code: '1'
           exit-level: 'warn'
           ignore: 'CIS-DI-0001,DKL-DI-0006'
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: 'custom-apache:1'
+          scanners: 'vuln,secret'
+          format: 'github'
+          exit-code: '1'
+          # vuln-type: 'os,library'
+          severity: 'CRITICAL'
