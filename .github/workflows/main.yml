@@ -91,7 +91,7 @@ jobs:
         run: cosign verify --key cosign.pub $( docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1 )
 
       - name: Push image
-        run: docker push -t $IMAGE_DIGEST
+        run: docker push -t ghcr.io/lcs-martins/custom-apache:1
 
       - name: ls
         run: ls -la
