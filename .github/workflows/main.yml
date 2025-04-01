@@ -45,7 +45,7 @@ jobs:
           docker build -t ghcr.io/lcs-martins/custom-apache:1 .
       - name: Push image
         run: |
-          docker push -t ghcr.io/lcs-martins/custom-apache:1
+          docker push ghcr.io/lcs-martins/custom-apache:1
 
       
 
