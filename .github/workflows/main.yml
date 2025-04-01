@@ -81,19 +81,17 @@ jobs:
       - name: Generate Keys
         run: cosign generate-key-pair
 
-      - name: Get image metadata
-        run: |
-          docker pull ghcr.io/lcs-martins/custom-apache:1
-          export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1)
-          ls -la
-          echo $IMAGE_DIGEST
+      - name: Pull image
+        run: docker pull ghcr.io/lcs-martins/custom-apache:1
 
       - name: Sign Keys
         run: cosign sign --yes --key cosign.key $( docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1 )
 
+      - name: Valid Keys
+        run: cosign verify --key cosign.pub $( docker inspect --format='{{index .RepoDigests 0}}' ghcr.io/lcs-martins/custom-apache:1 )
+
       - name: Push image
-        run: |
-          docker push -t $IMAGE_DIGEST
+        run: docker push -t $IMAGE_DIGEST
 
       - name: ls
         run: ls -la
