@@ -1,17 +1,19 @@
 name: Sign image
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Build an image from Dockerfile
         run: |
-          docker build -t custom-apache:1 .
-      - name: Check CIS Benchmark
-      - uses: goodwithtech/dockle-action@main
+          docker build -t built-image:scan .
+      - name: Run dockle
+        uses: goodwithtech/dockle-action@v0.4.15
         with:
-          image: 'custom-apache:1'
+          image: 'built-image:scan'
           format: 'list'
           exit-code: '1'
           exit-level: 'warn'
